@@ -48,7 +48,7 @@ public class SecurityConfig {
                                 "/v3/api-docs.yaml",
                                 "/h2-console/**"  // ✅ Add this line
                         ).permitAll()
-                        .requestMatchers("/admin/**", "/dashboard/**").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/**", "/dashboard/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers
