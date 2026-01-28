@@ -1,7 +1,8 @@
-insert into APP_USER(NAME, EMAIL, PASSWORD, ROLE, IS_VERIFIED) values(
+insert into APP_USER(USER_ID, NAME, EMAIL, PASSWORD, ROLE, IS_VERIFIED) values(
+     200,
      'Shruti',
      'shruti01@gmail.com',
-     '$2a$10$S.o4gqRXxa9hqg2RNLWAW.6FHjTOpn6UUTRUv7OBg.e.1E/tV5v2.',
+     '$2a$10$7pBOAmjgXQhmZMhpAvDM/uCaWJDtHT22kmkYHY9zH.Ck3SDlbTEYS',
      'ADMIN',
      true
 )
