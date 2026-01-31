@@ -25,7 +25,7 @@ public class AdminController {
     public UserResponse handleRoleChange(@RequestBody AdminUserRequest adminUserRequest){
         return adminService.changeUserRole(adminUserRequest);
     }
-    @DeleteMapping("/deleteUser")
+    @DeleteMapping("/deleteUser/{userId}")
     public void deleteUserByAdmin(@PathVariable Long userId){
         adminService.deleteUserByAdmin(userId);
     }
