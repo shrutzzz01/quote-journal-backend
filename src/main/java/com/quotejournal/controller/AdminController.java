@@ -29,7 +29,8 @@ public class AdminController {
         return adminService.changeUserRole(adminUserRequest);
     }
     @DeleteMapping("/deleteUser/{userId}")
-    public void deleteUserByAdmin(@PathVariable Long userId){
+    public ResponseEntity<String> deleteUserByAdmin(@PathVariable("userId") Long userId) {
         adminService.deleteUserByAdmin(userId);
+        return ResponseEntity.ok("User deleted successfully");
     }
 }
