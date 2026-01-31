@@ -9,15 +9,18 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/admin")
-@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     private final AdminService adminService;
-    public AdminController(AdminService adminService){
-        this.adminService=adminService;
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
     }
     @GetMapping("/dashboard")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<AdminDashboardResponse> getDashboard(){
         System.out.println("Current User Authorities: " +
                 SecurityContextHolder.getContext().getAuthentication().getAuthorities());
@@ -25,12 +28,18 @@ public class AdminController {
         return ResponseEntity.ok(dashboardData);
     }
     @PutMapping("/updateRole")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public UserResponse handleRoleChange(@RequestBody AdminUserRequest adminUserRequest){
         return adminService.changeUserRole(adminUserRequest);
     }
     @DeleteMapping("/deleteUser/{userId}")
-    public ResponseEntity<String> deleteUserByAdmin(@PathVariable("userId") Long userId) {
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Map<String, String>> deleteUserByAdmin(@PathVariable("userId") Long userId) {
         adminService.deleteUserByAdmin(userId);
-        return ResponseEntity.ok("User deleted successfully");
+
+        // Explicitly return a JSON object. React LOVES JSON.
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User deleted successfully");
+        return ResponseEntity.ok(response);
     }
 }
