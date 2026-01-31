@@ -27,7 +27,7 @@ public class UserService {
     @Transactional
     public UserResponse updateUser(UserRequest userRequest){
         String currName= SecurityContextHolder.getContext().getAuthentication().getName();
-        User user=userRepository.findByName(currName).orElseThrow(()->new ResourceNotFoundException("No user found with this username"));
+        User user=userRepository.findByEmail(currName).orElseThrow(()->new ResourceNotFoundException("No user found with this username"));
         user.setName(userRequest.name());
         user.setEmail(userRequest.email());
         user.setPassword(encoder.encode(userRequest.password()));

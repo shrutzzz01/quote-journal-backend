@@ -14,7 +14,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetailsServiceImpl(UserRepository userRepository){
         this.userRepository=userRepository;
     }
-    // Inside com.quotejournal.service.UserDetailsServiceImpl
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
