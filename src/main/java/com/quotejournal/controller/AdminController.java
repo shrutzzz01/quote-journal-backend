@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/admin")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     private final AdminService adminService;
     public AdminController(AdminService adminService){
         this.adminService=adminService;
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/dashboard")
     public ResponseEntity<AdminDashboardResponse> getDashboard(){
         AdminDashboardResponse dashboardData=adminService.getDashboardData();
